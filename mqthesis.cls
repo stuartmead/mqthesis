@@ -2,7 +2,7 @@
 %
 % Copyright (C) 2004 Paul Cochrane
 % Copyright (C) 2008-2015 Alexei Gilchrist
-% 
+% Copyright (C) 2015 Stuart Mead
 % 
 % This program is free software; you can redistribute it and/or
 % modify it under the terms of the GNU General Public License
@@ -90,6 +90,8 @@
 %%% load the required packages
 % fancyhdr for nice, fancy headings
 \RequirePackage{fancyhdr}
+% ccaption for good caption handling
+\RequirePackage{ccaption}
 % xspace so that spaces after commands are handled correctly
 \RequirePackage{xspace}
 
@@ -139,6 +141,27 @@ has not been submitted in whole or part for a degree in any university.
 	\vskip.5in
 	\signature{\@author}}
 
+% improved version of caption handling
+\usepackage{ccaption}
+\captionnamefont{\scshape}
+\captionstyle{}
+\makeatletter
+\renewcommand{\fnum@figure}[1]{\quad\small\textsc{\figurename~\thefigure}:}
+\renewcommand{\fnum@table}[1]{\quad\small\textsc{\tablename~\thetable}:}
+\renewcommand{\@makecaption}[2]{%
+\vskip\abovecaptionskip
+\sbox\@tempboxa{#1: #2}%
+\ifdim \wd\@tempboxa >\hsize
+  \def\baselinestretch{1}\@normalsize
+  #1: #2\par
+  \def\baselinestretch{1.5}\@normalsize
+\else
+  \global \@minipagefalse
+  \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+\fi
+\vskip\belowcaptionskip}
+\makeatother
+
 % now put in the titlepage
 % (bit of a misnomer really, as it is really the first three or four pages.
 \def\titlepage{%
@@ -180,7 +203,7 @@ has not been submitted in whole or part for a degree in any university.
 % The options used here are essentially that in Lamport's book, but
 % with small caps for the headings.
 \fancyhf{}
-\fancyhead[LE,RO]{\nouppercase{\thepage}}
+\fancyhead[LE,RO]{\sc \nouppercase{\thepage}}
 \fancyhead[LO]{\nouppercase{\rightmark}}
 \fancyhead[RE]{\nouppercase{\leftmark}}
 

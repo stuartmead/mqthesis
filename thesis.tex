@@ -1,4 +1,4 @@
-\documentclass[mres, copyrightpage]{mqthesis}
+\documentclass[phd, copyrightpage, greychapternumbers]{mqthesis}
 %----------------------------------------------------------
 % OPTIONS
 % Options you can use in the documentclass above:
@@ -14,6 +14,7 @@
 
 % this shows what labels you are using for cross references
 % \usepackage{showkeys} 
+\usepackage{helvet}
 
 %---------------------------------------------------------- 
 % STRUCTURE
@@ -32,7 +33,7 @@
 
 \title{Insert thesis title here}
 \author{Insert your name here}
-\department{Physics}  % put your department here
+\department{Environmental Sciences}  % put your department here
 
 \titlepage
 
@@ -47,9 +48,42 @@
 
 %---------------------------------------------------------- 
 % MAIN
-% include chapters as neededlmodern
+% include chapters as needed
 %---------------------------------------------------------- 
 \mainmatter
+
+%----------------------------------------------------------
+% Use old school chapter headers
+% This uses less space, but may not strictly follow
+% the MQ style.
+% Comment/uncomment out the following
+%----------------------------------------------------------
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
+\def\@makechapterhead#1{%
+  {\parindent \z@ \raggedright
+    \reset@font
+    \hrule
+    \vspace*{10\p@}%
+    \par
+    \Large \@chapapp{} \Huge\bfseries \thechapter %SRM: add \scshape for smallcaps
+    \par\nobreak
+    \vspace*{10\p@}%
+    \hrule
+    \par
+    \vspace*{1\p@}%
+    \hrule
+    %\vskip 40\p@
+    \vspace*{20\p@}
+    \Huge \bfseries #1\par\nobreak
+    \vskip 70\p@
+  }}
+%----------------------------------------------------------
+% Use old school chapter headers
+% This uses less space, but may not strictly follow
+% the MQ style.
+% Comment/uncomment out the previous
+%----------------------------------------------------------
 
 % Introduction
 \input{chap_intro}
