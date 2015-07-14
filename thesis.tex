@@ -1,11 +1,13 @@
-\documentclass[phd, copyrightpage, greychapternumbers]{mqthesis}
+\documentclass[phd, greychapternumbers]{mqthesis}
 %----------------------------------------------------------
 % OPTIONS
 % Options you can use in the documentclass above:
 %
 % phd/mres/hons = set the degree text [default=phd]
 % copyrightpage = print a copyright page on the back 
-%                 of the title page [default=false]
+%                 of the title page [default=false]. 
+%		NOTE: if true, you will have to manually change the name
+%		            and date in the mqthesis.cls file.
 % examinerscopy = print "Examiner's Copy" of title page and 
 %                 change linespacing to 1.5 [default=false]
 % greychapternumbers = print large chapter numbers in grey
@@ -15,6 +17,19 @@
 % this shows what labels you are using for cross references
 % \usepackage{showkeys} 
 \usepackage{helvet}
+% ifthenelse for if loops
+\usepackage{etoolbox}
+
+%---------------------------------------------------------
+% SPECIFIC OPTIONS
+% Other options to use in this thesis:
+%
+% smallcapschapter = use smallcaps for chapter titles
+\newtoggle{smallcapschapter}
+\togglefalse{smallcapschapter} % Change to true if you want capitals for chapter titles/headings
+%----------------------------------------------------------
+
+
 
 %---------------------------------------------------------- 
 % STRUCTURE
@@ -31,20 +46,20 @@
 %---------------------------------------------------------- 
 \frontmatter
 
-\title{Insert thesis title here}
-\author{Insert your name here}
-\department{Environmental Sciences}  % put your department here
+\title{Your thesis title} % put your title here
+\author{Your name} % put your name here
+\department{Your department}  % put your department here
 
 \titlepage
 
-\input{acknowledge}
-\input{listofpublications}
-\input{abstract}
+\input{acknowledge} % acknowledgements (acknowledge.tex)
+\input{abstract} % abstract (abstract.tex)
 
-\tableofcontents
+\tableofcontents 
 % comment out these as required for your discipline
 \listoffigures
 \listoftables
+\input{listofpublications}%SRM Moved to after TOC (listofpublications.tex)
 
 %---------------------------------------------------------- 
 % MAIN
@@ -66,7 +81,11 @@
     \hrule
     \vspace*{10\p@}%
     \par
-    \Large \@chapapp{} \Huge\bfseries \thechapter %SRM: add \scshape for smallcaps
+    \iftoggle{smallcapschapter}{  %SRM: Control smallcaps chapter titles
+   	 \Large \sc \@chapapp{} \Huge\bfseries \thechapter
+	}{
+	\Large \@chapapp{} \Huge\bfseries \thechapter
+	}
     \par\nobreak
     \vspace*{10\p@}%
     \hrule
@@ -90,6 +109,8 @@
 
 % Other chapters in here
 \input{chap_other}
+
+\input{changepoint}
 
 % Conclusion
 \input{chap_conclusion}

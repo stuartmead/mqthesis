@@ -171,14 +171,19 @@ has not been submitted in whole or part for a degree in any university.
         \newpage
         \vspace*{\fill}
         \begin{center}
-            \copyright{} \@author, \@copyrightyear.
+            \copyright{} Your Name, June 2015. % Need to update this
         \end{center}
         \begin{center}
             Typeset in \LaTeXe{}.
         \end{center}
         \normalsize
         \newpage
-        \signaturepage}{}
+        \signaturepage
+	}{
+        \normalsize
+        \newpage
+        \signaturepage
+	}
 }
 
 
