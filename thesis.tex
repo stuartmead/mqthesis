@@ -67,6 +67,8 @@
 %---------------------------------------------------------- 
 \mainmatter
 
+\makeatletter
+\let\old@makechapterhead\@makechapterhead
 %----------------------------------------------------------
 % Use old school chapter headers
 % This uses less space, but may not strictly follow
@@ -115,19 +117,8 @@
 % Conclusion
 \input{chap_conclusion}
 
-
-
-%---------------------------------------------------------- 
-% APPENDICES
-% include chapters as needed (will be numbered differently)
-%---------------------------------------------------------- 
-\appendix
-
-\input{chap_appendix}
-
-
-
-
+\makeatletter
+\let\@makechapterhead\old@makechapterhead
 %---------------------------------------------------------- 
 % BACK
 % list of symbols / references / index etc
@@ -139,5 +130,14 @@
 
 % Bibliography, in BibTeX format (the references.bib file)
 \bibliography{references}
+
+
+%---------------------------------------------------------- 
+% APPENDICES
+% include chapters as needed (will be numbered differently)
+%---------------------------------------------------------- 
+\appendix
+
+\input{chap_appendix}
 
 \end{document}
