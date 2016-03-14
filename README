@@ -37,4 +37,6 @@ Alexei Gilchrist
 
 This is aimed to be a modification of Alexei Gilchrist's thesis template based on personal preferences, making it more amenable to thesis-by-publication and easy for non-latex users to implement. User guide is in development. NOTE: This does not have explicit official approval. The version that has official approval is Alexei's which is avaliable from www.entropy.energy or the first release of this repository (https://github.com/stuartmead/mqthesis/releases/tag/2.0).
 
+Now with continuous integration so you don't have to worry about builds and have a backup! See the wiki for details on how to set it up for your own repo.
+
 Stuart Mead
