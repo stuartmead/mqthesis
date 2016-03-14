@@ -41,7 +41,7 @@ deploy:
 
 # provider releases means GitHub Releases
   provider: releases
-  api_key: OAUTH_TOKEN_FOR_RELEASE
+  api_key: "OAUTH_TOKEN_FOR_RELEASE"
 # the list of files to upload
   file: 
     - "thesis.pdf"
