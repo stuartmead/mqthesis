@@ -1,50 +1,35 @@
 os: linux
-
-# we use the R VM because it contains LaTeX and pandoc
 language: r
-#Speed up install
-cache: packages 
-
-# Get bibtex
+cache: packages
 addons:
   apt:
     packages:
     - texlive-bibtex-extra
-
 before_install:
-  - tlmgr install etoolbox
-  - tlmgr install biblatex
-  - tlmgr install bibtex8
-  - tlmgr install txfonts
-  - tlmgr install newtx
-  - tlmgr install geometry
-  - tlmgr install ccaption
-  - tlmgr install quotchap
-  - tlmgr install tex-gyre
-  - tlmgr install tocbibind
-  - tlmgr install graphics
-  - tlmgr install amsmath
-  - tlmgr install amsfonts
-  - tlmgr install hyperref
-  - tlmgr install fontaxes 
-  
+- tlmgr install etoolbox
+- tlmgr install biblatex
+- tlmgr install bibtex8
+- tlmgr install txfonts
+- tlmgr install newtx
+- tlmgr install geometry
+- tlmgr install ccaption
+- tlmgr install quotchap
+- tlmgr install tex-gyre
+- tlmgr install tocbibind
+- tlmgr install graphics
+- tlmgr install amsmath
+- tlmgr install amsfonts
+- tlmgr install hyperref
+- tlmgr install fontaxes
 script:
-# use xelatex to convert .tex to .pdf
-# of course we could use pandoc for this also, but pdflatex generates nicer PDFs
-  - xelatex -interaction=nonstopmode thesis.tex
-  - bibtex thesis
-  - xelatex -interaction=nonstopmode thesis.tex || true
-  - xelatex -interaction=nonstopmode thesis.tex || true  
-
-#after_success:
+- xelatex -interaction=nonstopmode thesis.tex
+- bibtex thesis
+- xelatex -interaction=nonstopmode thesis.tex || true
+- xelatex -interaction=nonstopmode thesis.tex || true
 deploy:
-
-# provider releases means GitHub Releases
   provider: releases
   api_key:
-    secure: "IhB9eYqCFnQ8WYBjnvn5+gNNawP3j3qD6KNVMcHlOxgz5Y7pwO2KxLsLYceSRZ7pEb41TGTnbm+M8erNY3MJvus4hICUpn6vundAMbsrQKRxJXfDj4g/A+UeVZl/+7eqpi4BSs/KLeQvB4KbI8ObN3f2gubdxKL/Gf0n8ck71bO34ivIZthHAlbweGg0Ew7jdcYwwz/tY4kdSPBdzdW+o1PjhwLaeMMHui1Bm6iDkZb4Vpxy0t847sWp8+hqoKnagOwK5uKG1iKotX/j8jj6KnE6WT8EhjpXc0BbUFr24iXCf8IcepPZ9k1FWu9KOYCPevAtBSa9LJmdcvYpG47In+1J0ylhi9dZRqHnB9PNibTCHiOkQUZf8YCHfjLv3d20tnZ1dDENJqi0fLjjEinzrUeB3PbgmxQRlMCzWReqW7K5umv371h1sw4wiImcKG3k/v2xGx4RVZxHnJIeqKAmAqDatynkSyl3UqbOSp9GpLGQPSl8jv4LntB+FRfTbDxGAv3wcO8Qv0c+xyRgH7jhuG97d2TaqlJv2uNgUyZd7mapNInho+HkcJPujhu9fwZI1Lq0sO7/zNS8opVkEzMEi7Co6lqBZV6IgIE2/9IPZFGjy18GfDbsCXxjaT5yxeNZXHe78LvWYD9fuH2etNKAjH+QBmfWGQEbBDadjH6eYKk="
-
-# the list of files to upload
-  file: 
-    - "thesis.pdf"
-  skip_cleanup: true
+    secure: WiHneqTzGFKcYSchE2YM/vum+u2UKHwxEpY51VmlxrwOm7hrKgSFnoYAaq/L+CJa7cL9HsbhEQrvznhYCl6xBI3Ic88pZZggy5qtv5axgLNtjGnH3LVqwqT0MQXf7V+wqBB01J4aSvW9EGtHaqOVuvT8MRPKd9Pa4rzBxlnsWn1eEJskgGOlmR2p9y+A29vKef5L7QmwGGB8PgdcEuFeF1dPzyrRjnpeNPtf3zWWAPjUfzOvmlXZfVCg7IbdDZoyfzv3qs9LcB7WPllvbf4yeWDKSQX5O6OqBLlTW+RmksqNwoPWaFD+3qx9dSHXX9ek3SkTKNdHICOw4IYjM6h2u2/MkMAUELs1TwcJN4szHfFIdu2AzBcDAw8qrjL51CMzeFoVzHvO+wB4acpbWkf7/iuQSelIfARUAdsR31MaNcCBUhUFsi0mo/pH+J/o3otpL2rNVnF4ZuOR9ttwyQI6aw8cEyqDGV46VCnLB54QFNeLgzyaB+0toSUDDHu5qCgdF66YYGjcmTl2gNMifYKl65Fv48CmiOwVnisua8Y3if4KnNNF0+4vsRnF7MFHodZivegzKeWtY7/6HFD+bfi0dFPWa+sXyLzJB/+5oGw8I0GpFEYnJViAWp2ywuho6vBPvAWGgtvHPHj2yreD8H4j6n6+rgleBXl20kWnr/IWlDI=
+  file: thesis.pdf
+  on:
+    repo: stuartmead/mqthesis
