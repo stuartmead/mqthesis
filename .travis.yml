@@ -1,0 +1,48 @@
+os: linux
+
+# we use the R VM because it contains LaTeX and pandoc
+language: r
+#Speed up install
+cache: packages 
+
+# Get bibtex
+addons:
+  apt:
+    packages:
+    - texlive-bibtex-extra
+
+before_install:
+  - tlmgr install etoolbox
+  - tlmgr install biblatex
+  - tlmgr install bibtex8
+  - tlmgr install txfonts
+  - tlmgr install newtx
+  - tlmgr install geometry
+  - tlmgr install ccaption
+  - tlmgr install quotchap
+  - tlmgr install tex-gyre
+  - tlmgr install tocbibind
+  - tlmgr install graphics
+  - tlmgr install amsmath
+  - tlmgr install amsfonts
+  - tlmgr install hyperref
+  - tlmgr install fontaxes 
+  
+script:
+# use xelatex to convert .tex to .pdf
+# of course we could use pandoc for this also, but pdflatex generates nicer PDFs
+  - xelatex -interaction=nonstopmode thesis.tex
+  - bibtex thesis
+  - xelatex -interaction=nonstopmode thesis.tex || true
+  - xelatex -interaction=nonstopmode thesis.tex || true  
+
+#after_success:
+deploy:
+
+# provider releases means GitHub Releases
+  provider: releases
+  api_key: "YOUR API KEY"
+# the list of files to upload
+  file: 
+    - "thesis.pdf"
+  skip_cleanup: true
